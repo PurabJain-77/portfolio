@@ -1,0 +1,276 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── CSS VARIABLES ── */
+:root {
+  --coral: #FF6B5B;
+  --coral-glow: rgba(255, 107, 91, 0.25);
+  --cream: #F2EDE6;
+  --surface: #161616;
+  --surface2: #1f1f1f;
+  --border: rgba(255, 255, 255, 0.07);
+  --text: rgba(255, 255, 255, 0.88);
+  --text-dim: rgba(255, 255, 255, 0.5);
+  --card: rgba(255, 255, 255, 0.04);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --now-bg: rgba(30, 28, 26, 0.85);
+  --nav-bg: rgba(20, 20, 20, 0.75);
+}
+
+:root.light {
+  --surface: #F2EDE6;
+  --surface2: #E8E2D9;
+  --border: rgba(0, 0, 0, 0.07);
+  --text: rgba(0, 0, 0, 0.88);
+  --text-dim: rgba(0, 0, 0, 0.45);
+  --card: rgba(0, 0, 0, 0.03);
+  --card-border: rgba(0, 0, 0, 0.1);
+  --now-bg: rgba(240, 235, 228, 0.9);
+  --nav-bg: rgba(242, 237, 230, 0.8);
+}
+
+/* ── BASE ── */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--surface);
+  color: var(--text);
+  overflow-x: hidden;
+  cursor: none;
+  transition: background 0.5s, color 0.5s;
+}
+
+::selection { background: var(--coral); color: #fff; }
+
+/* ── NOISE GRAIN ── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
+  opacity: 0.45;
+}
+
+/* ── CURSOR ── */
+.cursor-dot {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background: var(--coral);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s;
+}
+
+.cursor-ring {
+  position: fixed;
+  width: 34px;
+  height: 34px;
+  border: 1.5px solid var(--coral);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s, opacity 0.3s;
+  opacity: 0.6;
+}
+
+.cursor-ring.expand { width: 56px; height: 56px; opacity: 0.3; }
+
+.ripple {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9997;
+  border: 1.5px solid var(--coral);
+  transform: translate(-50%, -50%) scale(0);
+  animation: rippleOut 0.7s ease-out forwards;
+}
+
+@keyframes rippleOut {
+  to { transform: translate(-50%, -50%) scale(6); opacity: 0; }
+}
+
+/* ── AURORA BLOBS ── */
+.aurora-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  animation: drift ease-in-out infinite alternate;
+}
+
+@keyframes drift {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(3%, 5%) scale(1.08); }
+  100% { transform: translate(-4%, 2%) scale(0.95); }
+}
+
+/* ── MARQUEE ── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.marquee-track { animation: marquee 30s linear infinite; }
+
+/* ── NOW WIDGET FLOAT ── */
+@keyframes widgetFloat {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-10px); }
+}
+
+.widget-float { animation: widgetFloat 6s ease-in-out infinite; }
+
+/* ── SCROLL HINT ── */
+@keyframes scrollGrow {
+  0%, 100% { transform: scaleX(0.3); opacity: 0.3; }
+  50%       { transform: scaleX(1); opacity: 1; }
+}
+
+/* ── TYPEWRITER BLINK ── */
+@keyframes blink {
+  0%, 50%   { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.cursor-blink {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background: var(--coral);
+  margin-left: 4px;
+  vertical-align: middle;
+  animation: blink 0.9s infinite;
+}
+
+/* ── PULSE DOT ── */
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 var(--coral-glow); }
+  50%       { box-shadow: 0 0 0 6px transparent; }
+}
+
+.pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--coral);
+  animation: pulseGlow 2s infinite;
+}
+
+/* ── TERMINAL ── */
+.terminal-line {
+  white-space: pre-wrap;
+  line-height: 1.6;
+  margin-bottom: 4px;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.terminal-line.cmd   { color: var(--coral); }
+.terminal-line.dim   { color: rgba(255, 255, 255, 0.35); }
+.terminal-line.ok    { color: #27C93F; }
+
+/* ── DISCO (KONAMI) ── */
+@keyframes discoFloat {
+  0%   { transform: scale(1) translate(0, 0); }
+  100% { transform: scale(1.2) translate(4%, 3%); }
+}
+
+.disco-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  animation: discoFloat ease-in-out infinite alternate;
+}
+
+/* ── BOOK SPINE ── */
+.book-spine {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  border-left: 3px solid rgba(255, 255, 255, 0.12);
+  border-radius: 3px 6px 6px 3px;
+  transition: box-shadow 0.3s;
+}
+
+.book:hover .book-spine {
+  box-shadow: 6px 8px 24px rgba(0, 0, 0, 0.6);
+}
+
+.book:hover .book-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-4px);
+}
+
+/* ── TIMELINE SVG ── */
+.timeline-path {
+  stroke: var(--coral);
+  stroke-width: 2;
+  fill: none;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  transition: stroke-dashoffset 2.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.timeline-path.drawing { stroke-dashoffset: 0; }
+
+/* ── HORIZONTAL SCROLL PROJECTS ── */
+.projects-sticky-wrap { height: 300vh; }
+.projects-sticky {
+  position: sticky;
+  top: 0;
+  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* ── FADE UP ENTRANCE ── */
+@keyframes fadeUpEntrance {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-entrance { animation: fadeUpEntrance 0.8s ease forwards; }
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--coral); border-radius: 2px; }
+
+/* ── CURSOR NONE FOR INTERACTIVE ── */
+a, button, [role="button"] { cursor: none; }
+
+/* ── SKIP LINK ── */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  background: #FF6B5B;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-family: var(--font-dm-mono), monospace;
+  text-decoration: none;
+  z-index: 9999;
+  transition: top 0.2s;
+}
+.skip-link:focus { top: 16px; }
+
+/* ── A11Y FOCUS ── */
+:focus-visible {
+  outline: 2px solid #FF6B5B;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ── COMMAND PALETTE terminal lines ── */
+.terminal-line { white-space: pre-wrap; line-height: 1.6; margin-bottom: 4px; color: rgba(255,255,255,0.75); }
+.terminal-line.cmd { color: #FF6B5B; }
+.terminal-line.dim { color: rgba(255,255,255,0.35); }
