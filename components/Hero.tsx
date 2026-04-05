@@ -159,8 +159,11 @@ export default function Hero({ onOpenTerminal }: Props) {
           onMouseMove={handleNameMove}
           onMouseLeave={handleNameLeave}
           className="font-syne font-extrabold leading-[0.9] tracking-[-0.03em] mb-6 will-change-transform"
-          style={{ fontSize:"clamp(3.5rem,10vw,9rem)", color:"var(--cream)" }}
-        >
+style={{
+  fontSize: "clamp(3.5rem,10vw,9rem)",
+  color: "var(--text)",
+  opacity: 0.12
+}}        >
           Purab Jain
         </motion.h1>
 
