@@ -274,55 +274,15 @@ a, button, [role="button"] { cursor: none; }
 .terminal-line { white-space: pre-wrap; line-height: 1.6; margin-bottom: 4px; color: rgba(255,255,255,0.75); }
 .terminal-line.cmd { color: #FF6B5B; }
 .terminal-line.dim { color: rgba(255,255,255,0.35); }
-@media (max-width: 768px) {
-  nav {
-    width: calc(100vw - 16px);
-    left: 8px;
-    transform: none;
-    justify-content: space-between;
-    gap: 8px;
-    overflow-x: auto;
-  }
 
-  .nav-controls {
-    gap: 6px;
-  }
+/* ── WIP BADGE pulse ── */
+@keyframes wipPulse {
+  0%,100% { box-shadow: 0 0 4px rgba(255,195,0,0.4); }
+  50%     { box-shadow: 0 0 10px rgba(255,195,0,0.8); }
+}
 
-  .mode-toggle,
-  .sound-toggle,
-  .nav-cta {
-    flex-shrink: 0;
-  }
-
-  .nav-cta {
-    padding: 8px 12px;
-    font-size: 0.58rem;
-  }
-
-  .hero-name {
-    word-break: break-word;
-  }
-
-  .hero-tagline {
-    min-height: auto;
-  }
-
-  .now-widget {
-    width: 100%;
-  }
-
-  .project-card {
-    overflow: hidden;
-  }
-
-  .section-wrap {
-    width: 100%;
-    overflow-x: hidden;
-  }
-
-  body,
-  html {
-    max-width: 100%;
-    overflow-x: hidden;
-  }
+/* ── TERMINAL BUTTON blink ── */
+@keyframes tbtnBlink {
+  0%,100% { opacity: 1; }
+  50%     { opacity: 0; }
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { useTheme } from "next-themes";
 
 import CursorEffect      from "@/components/CursorEffect";
@@ -21,14 +21,13 @@ import Footer            from "@/components/Footer";
 import Terminal          from "@/components/Terminal";
 import EasterEgg         from "@/components/EasterEgg";
 import CommandPalette    from "@/components/CommandPalette";
+import Rocky             from "@/components/Rocky";
 import { useSound }      from "@/hooks/useSound";
 import { useKonami }     from "@/hooks/useKonami";
 
-/* Scroll-to-top button */
-import { useState as useLocalState } from "react";
-
+/* ── Scroll-to-top btn ── */
 function ScrollTopBtn() {
-  const [visible, setVisible] = useLocalState(false);
+  const [visible, setVisible] = useState(false);
   useEffect(() => {
     const fn = () => setVisible(window.scrollY > 320);
     window.addEventListener("scroll", fn, { passive: true });
@@ -38,11 +37,12 @@ function ScrollTopBtn() {
     <button
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       aria-label="Back to top"
-      className="fixed bottom-8 right-8 z-[600] w-11 h-11 rounded-full text-white text-[1.1rem] border-none shadow-[0_4px_20px_rgba(255,107,91,0.4)] transition-all duration-300"
+      className="fixed bottom-8 right-8 z-[600] w-11 h-11 rounded-full text-white text-[1.1rem] border-none transition-all duration-300"
       style={{
         background: "#FF6B5B",
-        opacity:    visible ? 1 : 0,
-        transform:  visible ? "translateY(0) scale(1)" : "translateY(12px) scale(0.85)",
+        boxShadow: "0 4px 20px rgba(255,107,91,0.4)",
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0) scale(1)" : "translateY(12px) scale(0.85)",
         pointerEvents: visible ? "all" : "none",
       }}
     >
@@ -55,12 +55,14 @@ export default function Home() {
   const [soundEnabled, setSoundEnabled] = useState(false);
   const [terminalOpen, setTerminalOpen] = useState(false);
   const [easterActive, setEasterActive] = useState(false);
+  const [cmdKSignal,   setCmdKSignal]   = useState(0); // increment to signal Rocky
   const { theme, setTheme } = useTheme();
   const isDark = theme !== "light";
 
+  const rockyRef = useRef<{ handleClick: () => void } | null>(null);
+
   const { playClick, playChord } = useSound(soundEnabled);
 
-  // Global click sound on interactive elements
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       const t = e.target as HTMLElement;
@@ -83,6 +85,15 @@ export default function Home() {
   const openTerminal  = useCallback(() => setTerminalOpen(true),  []);
   const closeTerminal = useCallback(() => setTerminalOpen(false), []);
 
+  // When CmdK opens, signal Rocky
+  const openCmd = useCallback(() => {
+    setCmdKSignal(s => s + 1);
+  }, []);
+
+  const pokeRocky = useCallback(() => {
+    setCmdKSignal(s => s + 1);
+  }, []);
+
   const activateEaster = useCallback(() => {
     setEasterActive(true);
     playChord([880, 1100, 1320], 0.3);
@@ -93,24 +104,22 @@ export default function Home() {
 
   return (
     <>
-      {/* Global effects */}
       <CursorEffect />
       <MouseLight />
       <AuroraBackground isDark={isDark} />
 
-      {/* Skip to content */}
       <a href="#main-content" className="skip-link">Skip to main content</a>
 
-      {/* Overlays */}
       <Terminal open={terminalOpen} onClose={closeTerminal} />
       <EasterEgg active={easterActive} onDismiss={() => setEasterActive(false)} />
       <CommandPalette
         onOpenTerminal={openTerminal}
         onToggleTheme={toggleTheme}
         onToggleSound={toggleSound}
+        onPokeRocky={pokeRocky}
+        onOpen={openCmd}
       />
 
-      {/* Nav */}
       <Navbar
         soundEnabled={soundEnabled}
         onSoundToggle={toggleSound}
@@ -118,7 +127,6 @@ export default function Home() {
         onModeToggle={toggleTheme}
       />
 
-      {/* Main */}
       <main id="main-content">
         <Hero onOpenTerminal={openTerminal} />
         <Marquee />
@@ -134,6 +142,7 @@ export default function Home() {
 
       <Footer />
       <ScrollTopBtn />
+      <Rocky onCmdKOpen={cmdKSignal > 0 ? () => {} : undefined} cmdKSignal={cmdKSignal} />
     </>
   );
 }

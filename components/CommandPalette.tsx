@@ -12,12 +12,14 @@ interface CmdItem {
 }
 
 interface Props {
+  onPokeRocky: () => void;
+  onOpen?: () => void;
   onOpenTerminal: () => void;
   onToggleTheme:  () => void;
   onToggleSound:  () => void;
 }
 
-export default function CommandPalette({ onOpenTerminal, onToggleTheme, onToggleSound }: Props) {
+export default function CommandPalette({ onOpenTerminal, onToggleTheme, onToggleSound, onPokeRocky, onOpen }: Props) {
   const [open,     setOpen]     = useState(false);
   const [query,    setQuery]    = useState("");
   const [active,   setActive]   = useState(0);
@@ -37,6 +39,7 @@ export default function CommandPalette({ onOpenTerminal, onToggleTheme, onToggle
     { group:"Navigate", icon:"🗓", label:"Journey",  hint:"#journey", action:()=>scrollTo("#journey")          },
     { group:"Navigate", icon:"📬", label:"Contact",  hint:"#contact", action:()=>scrollTo("#contact")          },
     // Actions
+    { group:"Actions", icon:"🕷️", label:"Poke Rocky",    hint:"pet",  action: onPokeRocky },
     { group:"Actions", icon:"💻", label:"Open Terminal",  hint:"_",    action: onOpenTerminal },
     { group:"Actions", icon:"🌙", label:"Toggle Theme",   hint:"mode", action: onToggleTheme  },
     { group:"Actions", icon:"🔊", label:"Toggle Sound",   hint:"sound",action: onToggleSound  },
@@ -64,7 +67,7 @@ export default function CommandPalette({ onOpenTerminal, onToggleTheme, onToggle
     return acc;
   }, {});
 
-  const openPalette  = useCallback(() => { setOpen(true); setQuery(""); setActive(0); }, []);
+  const openPalette  = useCallback(() => { setOpen(true); setQuery(""); setActive(0); onOpen?.(); }, [onOpen]);
   const closePalette = useCallback(() => { setOpen(false); }, []);
 
   const run = useCallback((item: CmdItem) => { item.action(); closePalette(); }, [closePalette]);
