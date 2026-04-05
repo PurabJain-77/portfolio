@@ -159,17 +159,14 @@ export default function Hero({ onOpenTerminal }: Props) {
           onMouseMove={handleNameMove}
           onMouseLeave={handleNameLeave}
           className="font-syne font-extrabold leading-[0.9] tracking-[-0.03em] mb-6 will-change-transform"
-style={{
-  fontSize: "clamp(3.5rem,10vw,9rem)",
-  color: "var(--text)",
-  opacity: 0.12
-}}        >
+          style={{ fontSize: "clamp(3.5rem,10vw,9rem)", color: "var(--text)" }}
+        >
           Purab Jain
         </motion.h1>
 
         <motion.div {...fade(0.7)}
           className="font-serif italic leading-[1.2] mb-7"
-          style={{ fontSize:"clamp(1.3rem,3.5vw,3rem)", color:"#FF6B5B", minHeight:"3.5em" }}
+          style={{ fontSize:"clamp(1.3rem,3.5vw,3rem)", color:"#FF6B5B", minHeight:"2.2em" }}
         >
           <span dangerouslySetInnerHTML={{ __html: display }} />
           <span className="cursor-blink" />

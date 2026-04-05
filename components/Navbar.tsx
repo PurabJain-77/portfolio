@@ -21,20 +21,20 @@ function NavLink({ href, label }: { href: string; label: string }) {
   };
 
   return (
-    <a
+    
       href={href}
       onClick={handleClick}
       onMouseEnter={scramble}
       onMouseLeave={reset}
       className="text-[0.72rem] tracking-[0.04em] px-3.5 py-1.5 rounded-full transition-all no-underline"
-      style={{ color: "rgba(0,0,0,0.55)" }}
+      style={{ color: "var(--text-dim)" }}
       onMouseOver={e => {
         (e.currentTarget as HTMLAnchorElement).style.background = "var(--card)";
-        (e.currentTarget as HTMLAnchorElement).style.color = "var(--text)";
+        (e.currentTarget as HTMLAnchorElement).style.color = "var(--coral, #FF6B5B)";
       }}
       onMouseOut={e => {
         (e.currentTarget as HTMLAnchorElement).style.background = "transparent";
-        (e.currentTarget as HTMLAnchorElement).style.color = "rgba(0,0,0,0.55)";
+        (e.currentTarget as HTMLAnchorElement).style.color = "var(--text-dim)";
       }}
     >
       {text}

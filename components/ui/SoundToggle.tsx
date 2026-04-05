@@ -13,15 +13,16 @@ export default function SoundToggle({ enabled, onToggle }: Props) {
       onClick={onToggle}
       className={cn(
         "flex items-center gap-2 px-3.5 py-1.5 rounded-full border text-[0.62rem] tracking-widest uppercase transition-all",
-        "border-white/8 bg-white/4",
-        enabled ? "text-[#FF6B5B] border-[rgba(255,107,91,0.25)]" : "text-white/50"
+        enabled
+          ? "text-[#FF6B5B] border-[rgba(255,107,91,0.35)]"
+          : "border-[var(--card-border)] bg-[var(--card)]"
       )}
+      style={{ color: enabled ? "#FF6B5B" : "var(--text-dim)" }}
     >
-      {/* knob */}
       <span
         className={cn(
-          "relative w-7 h-4 rounded-full transition-colors duration-300",
-          enabled ? "bg-[#FF6B5B]" : "bg-white/8"
+          "relative w-7 h-4 rounded-full transition-colors duration-300 flex-shrink-0",
+          enabled ? "bg-[#FF6B5B]" : "bg-[var(--card-border)]"
         )}
       >
         <span
