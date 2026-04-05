@@ -75,7 +75,6 @@ All content lives in **`lib/data.ts`** — edit projects, skills, journal entrie
 
 ## Features
 
-- afds
 - 🌙 Dark / ☀️ Light mode
 - 🔊 Sound toggle (Web Audio API)
 - ✍️ Typewriter hero tagline
