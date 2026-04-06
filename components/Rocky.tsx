@@ -113,10 +113,11 @@ export default function Rocky({ cmdKSignal = 0 }: Props) {
               transition={{ duration: 0.2 }}
               className="absolute left-0 px-3 py-2 rounded-xl border font-mono text-[0.62rem] leading-[1.5] pointer-events-none"
               style={{
-                bottom: "62px",
-                background: "var(--card)", borderColor: "var(--card-border)",
+                bottom: "130px",
+                background: "var(--now-bg)", borderColor: "var(--card-border)",
                 backdropFilter: "blur(12px)", color: "var(--text-dim)",
-                width: "180px",
+                width: "190px",
+                boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
               }}
             >
               {tip}

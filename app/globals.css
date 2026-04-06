@@ -16,8 +16,12 @@
   --card-border: rgba(255, 255, 255, 0.08);
   --now-bg: rgba(30, 28, 26, 0.85);
   --nav-bg: rgba(20, 20, 20, 0.75);
+  --project-card-bg: rgba(16, 18, 16, 0.82);
+  --project-card-border: rgba(255, 255, 255, 0.06);
+  --project-card-grain: radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
 }
 
+/* next-themes adds class to <html> — target both selectors */
 :root.light,
 html.light {
   --surface: #F2EDE6;
@@ -29,6 +33,9 @@ html.light {
   --card-border: rgba(0, 0, 0, 0.12);
   --now-bg: rgba(240, 235, 228, 0.9);
   --nav-bg: rgba(242, 237, 230, 0.85);
+  --project-card-bg: rgba(255, 255, 255, 0.80);
+  --project-card-border: rgba(0, 0, 0, 0.1);
+  --project-card-grain: radial-gradient(rgba(0,0,0,0.035) 1px, transparent 1px);
 }
 
 /* ── BASE ── */

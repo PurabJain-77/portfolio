@@ -71,11 +71,11 @@ export default function Projects() {
               whileHover={{ y: -6 }}
               className="project-card flex-shrink-0 rounded-[20px] p-9 border relative overflow-hidden cursor-none"
               style={{
-                minWidth: p.featured ? "480px" : "380px",
-                background: "rgba(16,18,16,0.82)",
-                borderColor: "rgba(255,255,255,0.06)",
+                minWidth: p.featured ? "min(480px, 88vw)" : "min(380px, 88vw)",
+                background: "var(--project-card-bg)",
+                borderColor: "var(--project-card-border)",
                 backdropFilter: "blur(16px)",
-                backgroundImage: "radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px)",
+                backgroundImage: "var(--project-card-grain)",
                 backgroundSize: "20px 20px",
               }}
             >
