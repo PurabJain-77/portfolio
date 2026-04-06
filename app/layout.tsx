@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Martian_Mono, Cormorant_Garamond } from "next/font/google";
 import { ThemeProvider } from "next-themes";
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import "./globals.css";
 
 export const viewport: Viewport = {
@@ -100,6 +101,7 @@ export default function RootLayout({
         >
           {children}
         </ThemeProvider>
+        <SpeedInsights />
       </body>
     </html>
   );
