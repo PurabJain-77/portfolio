@@ -50,6 +50,12 @@ body {
   transition: background 0.5s, color 0.5s;
 }
 
+@media (max-width: 768px) {
+  body { cursor: auto; }
+  a, button { cursor: pointer; }
+  .cursor-dot, .cursor-ring { display: none; }
+}
+
 ::selection { background: var(--coral); color: #fff; }
 
 /* ── NOISE GRAIN ── */

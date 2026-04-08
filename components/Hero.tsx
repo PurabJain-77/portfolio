@@ -134,8 +134,8 @@ export default function Hero({ onOpenTerminal }: Props) {
 
   return (
     <section id="hero" aria-label="Introduction"
-      className="relative min-height-screen flex flex-col md:flex-row items-center px-6 md:px-16 pt-[120px] pb-20 gap-8 md:gap-10 z-[1]"
-      style={{ minHeight: "100vh" }}
+      className="relative flex flex-col md:flex-row items-center px-6 md:px-16 pt-28 pb-16 md:pt-[120px] md:pb-20 gap-6 md:gap-10 z-[1]"
+      style={{ minHeight: "100svh" }}
     >
       {/* Left */}
       <div className="flex-1 min-w-0 flex flex-col items-center md:items-start text-center md:text-left">

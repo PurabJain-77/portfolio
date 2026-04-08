@@ -57,9 +57,8 @@ export const CERTS:Cert[]=[
 ];
 
 export const CURRENTLY:CurrentlyItem[]=[
-  {emoji:"🚀",label:"Building",val:"together.",sub:"startup app"},
-  {emoji:"📚",label:"Reading",val:"Project Hail Mary",sub:"Andy Weir"},
-  {emoji:"📺",label:"Watching",val:"Game of Thrones",sub:"Finally catching up"},
+  {emoji:"🚀",label:"Building",val:"together.: Better Plans",sub:"app connecting people"},
+  { emoji:"📚", label:"Reading", val:"The Three-Body Problem", sub:"Liu Cixin" },
   {emoji:"⚽",label:"Following",val:"La Liga & UCL",sub:"This season's a banger"},
 ];
 

@@ -36,9 +36,15 @@ const NAV_LINKS = [
 
 export default function Navbar({ soundEnabled, onSoundToggle, onModeToggle }: Props) {
   return (
-    <nav aria-label="Main navigation"
-      className="fixed top-5 left-1/2 -translate-x-1/2 z-[500] flex items-center rounded-full border px-2 py-2 pl-3.5 shadow-[0_8px_32px_rgba(0,0,0,0.4)]"
-      style={{ background: "var(--nav-bg)", borderColor: "var(--card-border)", backdropFilter: "blur(20px)" }}
+<nav
+      aria-label="Main navigation"
+      className="fixed top-3 left-1/2 -translate-x-1/2 z-[500] flex items-center rounded-full border px-2 py-2 pl-3.5 shadow-[0_8px_32px_rgba(0,0,0,0.4)]"
+      style={{
+        background: "var(--nav-bg)",
+        borderColor: "var(--card-border)",
+        backdropFilter: "blur(20px)",
+        maxWidth: "calc(100vw - 24px)",
+      }}
     >
       <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         aria-label="Back to top"
@@ -48,7 +54,7 @@ export default function Navbar({ soundEnabled, onSoundToggle, onModeToggle }: Pr
           style={{ background: "linear-gradient(135deg,#FF6B5B,#ff9a7a)" }}>
           PJ
         </div>
-        <span className="font-syne font-semibold text-[0.85rem] whitespace-nowrap" style={{ color: "var(--text)" }}>
+        <span className="hidden sm:inline font-syne font-semibold text-[0.85rem] whitespace-nowrap" style={{ color: "var(--text)" }}>
           Purab Jain
         </span>
       </button>
@@ -58,7 +64,9 @@ export default function Navbar({ soundEnabled, onSoundToggle, onModeToggle }: Pr
       </div>
 
       <div className="flex items-center gap-2">
-        <SoundToggle enabled={soundEnabled} onToggle={onSoundToggle} />
+      <div className="hidden sm:block">
+          <SoundToggle enabled={soundEnabled} onToggle={onSoundToggle} />
+        </div>
         <ThemeToggle onToggle={onModeToggle} />
         <a href="mailto:thisispurab01@gmail.com"
           className="px-5 py-2 rounded-full text-[0.68rem] tracking-[0.06em] font-medium whitespace-nowrap transition-all no-underline"
