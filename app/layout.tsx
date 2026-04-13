@@ -1,11 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Martian_Mono, Cormorant_Garamond } from "next/font/google";
 import { ThemeProvider } from "next-themes";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
+  themeColor: "#FF6B5B",
 };
 
 const bricolage = Bricolage_Grotesque({
@@ -50,7 +52,6 @@ export const metadata: Metadata = {
       url: "https://linkedin.com/in/purabjain01/",
     },
   ],
-  themeColor: "#FF6B5B",
   openGraph: {
     title: "Purab Jain — EEE · Design · Cloud",
     description:
@@ -100,6 +101,7 @@ export default function RootLayout({
         >
           {children}
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
